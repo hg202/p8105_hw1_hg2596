@@ -67,3 +67,17 @@ mean(pull(third_df,vec_fac))
 Simply pulling the column from the dataset and getting the mean was successful for the **normally distributed variable** and **logical variable**.For the  normally distributed variable it was able to take the mean of that column because it contained all numeric. However, for the logical variable it took a different approach because they are characters, it gave a value for each character value for example, labeling it a "0" or "1" : either it is there or it is not. Then, for the mean it was able to give a value because it treated the values as proportions. 
 
 Unlike the **vector variable** or a **factor variable** which R does not try to give other numeric values to but just say's "NA" because it can not take the mean of character values.
+
+# Converting variables  
+
+```{r setup, warning = FALSE, echo = T, results = 'hide'}
+mean(as.numeric(pull(third_df,logical)))
+
+mean(as.numeric(pull(third_df,vec_char)))
+
+mean(as.numeric(pull(third_df,vec_fac)))
+
+```
+
+When we convert these variables into numeric values. The R code is able to do it successfully for the **logical variable** and the **vector variable**. The same method is used to explain what's happening to the logic variable, it is able to assign it numeric values. 
+However, it can not do that for character variable because it doesn't know the difference between the groups, unlike the vector which tells it how to rank it. 
