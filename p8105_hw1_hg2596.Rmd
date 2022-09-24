@@ -11,7 +11,7 @@ library(tidyverse)
 library(dplyr)
 ```
 
-# Installing and describing Penguins Data 
+# Installing and Describing Penguins Data 
 
 ```{r}
 data("penguins",package = "palmerpenguins")
@@ -25,10 +25,10 @@ ncol(penguins)
 
 head(penguins)
 
-#mean(penguins)
-
-#max(penguins,flipper_length_mm)
-
 round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE))
 ```
 In the dataset `penguins` there are **344 rows** and **8 columns**. Each row represents a penguin's  species type, island location, bill length (mm), bill depth (mm), flipper length (mm), body mass (g), sex (m/f) and year. For this dataset the mean flipper length is **201 mm**. 
+
+
+
+
