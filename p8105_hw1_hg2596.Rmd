@@ -1,5 +1,7 @@
 ---
 title: "Homework 1"
+author: Hilina Giday 
+date: 9/24/2022
 output: github_document
 ---
 
@@ -7,8 +9,6 @@ output: github_document
 
 ```{r}
 library(tidyverse)
-
-library(dplyr)
 ```
 
 # Installing and Describing Penguins Data 
@@ -18,16 +18,12 @@ data("penguins",package = "palmerpenguins")
 
 ```
 
-```{r}
-nrow(penguins)
+In the dataset penguins there are `r nrow(penguins)` rows and `r ncol(penguins)` columns.
+Each row represents a penguin's  species type, island location, bill length (mm), bill depth (mm), flipper length (mm), body mass (g), sex (m/f) and year. 
 
-ncol(penguins)
 
-head(penguins)
+The mean flipper length is `r round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE))` mm, while the maximum value for flipper length is `r max(penguins[,5], na.rm = TRUE)` mm and the minimum flipper length is `r min(penguins[,5],na.rm = TRUE)` mm.
 
-round(mean(pull(penguins,flipper_length_mm),na.rm = TRUE))
-```
-In the dataset `penguins` there are **344 rows** and **8 columns**. Each row represents a penguin's  species type, island location, bill length (mm), bill depth (mm), flipper length (mm), body mass (g), sex (m/f) and year. For this dataset the mean flipper length is **201 mm**. 
 
 # Creating a Scatterplot 
 
@@ -36,9 +32,10 @@ In the dataset `penguins` there are **344 rows** and **8 columns**. Each row rep
 myplot2 = 
   ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm,col = species)) + geom_point() 
 
-
 ggsave("myplot2.pdf",myplot2)
+
 ```
+
 
 # Problem 2 
 
@@ -51,7 +48,6 @@ third_df = tibble(
   vec_char = c("one","two","three","two","one","one","two","one","two","three"),
   vec_fac = factor (c("one","two","three","one","two","three","one","one","two","three"),
                     levels = c("one", "two", "three" ))
-  
 )
 ```
 
@@ -64,11 +60,11 @@ mean(pull(third_df,vec_char))
 mean(pull(third_df,vec_fac))
 ```
 
-Simply pulling the column from the dataset and getting the mean was successful for the **normally distributed variable** and **logical variable**.For the  normally distributed variable it was able to take the mean of that column because it contained all numeric. However, for the logical variable it took a different approach because they are characters, it gave a value for each character value for example, labeling it a "0" or "1" : either it is there or it is not. Then, for the mean it was able to give a value because it treated the values as proportions. 
+Simply pulling the column from the dataset and getting the mean was successful for the **normally distributed variable** and **logical vector variable**.For the  normally distributed values it was able to take the mean of that column because they were all in numeric format. However, for the logical vector column it took a different approach because they were characters, because a mean can't be taken of characters, it labeled them either as "0" or "1". Then, for the mean it was able to give a value and this value can be interpreted as a proportion. 
 
-Unlike the **vector variable** or a **factor variable** which R does not try to give other numeric values to but just say's "NA" because it can not take the mean of character values.
+Unlike the **character vector variable** or for the **factor vector variable** which R does not label them as numeric values but just say's "NA" because it can not take the mean of character values.
 
-# Converting variables  
+# Converting variables into Numeric Values  
 
 ```{r setup, warning = FALSE, echo = T, results = 'hide'}
 mean(as.numeric(pull(third_df,logical)))
@@ -79,5 +75,8 @@ mean(as.numeric(pull(third_df,vec_fac)))
 
 ```
 
-When we convert these variables into numeric values. The R code is able to do it successfully for the **logical variable** and the **vector variable**. The same method is used to explain what's happening to the logic variable, it is able to assign it numeric values. 
-However, it can not do that for character variable because it doesn't know the difference between the groups, unlike the vector which tells it how to rank it. 
+When we code to convert these variables into numeric values, R is able to do it successfully for the **logical vector variable** and the **factor vector variable**. The same method is used to explain what's happening to the logic vector column, it is being assigned numeric values and interpreted as a proportion. 
+
+For the **factor vector variable**, it was able to also assign numeric values based on how we ranked the levels, unlike the **character vector variable** which doesn't have levels so R wasn't able to provide numeric values and therefore kept it character values and was not able to take the mean. 
+
+
